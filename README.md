@@ -17,7 +17,7 @@ Repositório para as atividades em DUPLA da disciplina Programação Orientada a
 # Listas
 * 1<a href="#1"> atvi-wb-typescript ✅</a>
 * 2<a href="#2"> atvii-wb-typescript ✅</a>
-* 3<a href="#3"> atviii-wb-typescript 🚧</a>
+* 3<a href="#3"> atviii-wb-typescript ✅</a>
 * 4<a href="#4"> atviv-wb-typescript 🚧</a>
 * 5<a href="#5"> atvv-wb-typescript 🚧</a>
 
@@ -25,7 +25,7 @@ Repositório para as atividades em DUPLA da disciplina Programação Orientada a
 
 ## Lista I
 
-#### Primeiro projeto do WB é do tipo cli (command-line interface) com cadastros dos clientes e seus respectivos pets, produtos, serviços e listagens de negócios.
+#### Primeiro projeto do WB é do tipo cli (command-line interface) com cadastros dos clientes e seus respectivos produtos, serviços e listagens de negócios.
 Para rodar o programa deve usar os comandos: 
 
 ```cmd
@@ -51,7 +51,7 @@ npm start
 
 ## Lista III
 
-#### Terceiro projeto do PL tem o objetivo de desenvolver interfaces gráficas (sem vínculo algum com
+#### Terceiro projeto do WB tem o objetivo de desenvolver interfaces gráficas (sem vínculo algum com
 aplicação back-end) trabalhando com funções no TypeScript.
 Para rodar o programa deve usar os comandos: 
 
