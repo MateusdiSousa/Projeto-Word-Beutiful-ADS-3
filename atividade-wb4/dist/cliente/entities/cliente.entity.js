@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClienteEntity = void 0;
+const vendas_produto_entity_1 = require("../../vendas_produtos/entities/vendas_produto.entity");
+const vendas_servico_entity_1 = require("../../vendas_servicos/entities/vendas_servico.entity");
 const typeorm_1 = require("typeorm");
 let ClienteEntity = class ClienteEntity {
 };
@@ -66,6 +68,14 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], ClienteEntity.prototype, "total_gasto", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => vendas_produto_entity_1.VendasProduto, (produtos_consumidos) => produtos_consumidos.cliente),
+    __metadata("design:type", Array)
+], ClienteEntity.prototype, "produtos_consumidos", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => vendas_servico_entity_1.VendasServico, (servicos_consumidos) => servicos_consumidos.cliente),
+    __metadata("design:type", Array)
+], ClienteEntity.prototype, "servicos_consumidos", void 0);
 exports.ClienteEntity = ClienteEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'Clientes' })
 ], ClienteEntity);

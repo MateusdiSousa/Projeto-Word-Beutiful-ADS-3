@@ -7,4 +7,5 @@ export declare class ServicoEntity {
     quantidade_vendas_masculino: number;
     quantidade_vendas_feminino: number;
     valor_total_vendas: number;
+    servico_vendas: any;
 }

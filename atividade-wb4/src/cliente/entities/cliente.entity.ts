@@ -1,6 +1,8 @@
+import { VendasProduto } from 'src/vendas_produtos/entities/vendas_produto.entity';
+import { VendasServico } from 'src/vendas_servicos/entities/vendas_servico.entity';
 import {
   Entity,
-  OneToOne,
+  OneToMany,
   Column,
   PrimaryGeneratedColumn,
   JoinColumn,
@@ -46,4 +48,10 @@ export class ClienteEntity {
 
   @Column()
   total_gasto: number;
+
+  @OneToMany(() => VendasProduto, (produtos_consumidos) => produtos_consumidos.cliente)
+  produtos_consumidos : VendasProduto[]
+
+  @OneToMany(() => VendasServico, (servicos_consumidos) => servicos_consumidos.cliente)
+  servicos_consumidos : VendasServico[]
 }

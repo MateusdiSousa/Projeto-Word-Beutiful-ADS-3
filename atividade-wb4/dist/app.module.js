@@ -15,6 +15,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("@nestjs/config");
 const servico_module_1 = require("./servico/servico.module");
 const produto_module_1 = require("./produto/produto.module");
+const vendas_produtos_module_1 = require("./vendas_produtos/vendas_produtos.module");
+const vendas_servicos_module_1 = require("./vendas_servicos/vendas_servicos.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,6 +37,8 @@ exports.AppModule = AppModule = __decorate([
             cliente_module_1.ClienteModule,
             servico_module_1.ServicoModule,
             produto_module_1.ProdutoModule,
+            vendas_produtos_module_1.VendasProdutosModule,
+            vendas_servicos_module_1.VendasServicosModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

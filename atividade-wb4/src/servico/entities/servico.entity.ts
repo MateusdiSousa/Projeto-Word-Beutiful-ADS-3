@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VendasServico } from 'src/vendas_servicos/entities/vendas_servico.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Servicos' })
 export class ServicoEntity {
@@ -25,4 +26,7 @@ export class ServicoEntity {
 
   @Column()
   valor_total_vendas: number;
+
+  @OneToMany(() => VendasServico , (vendas) => vendas.servico)
+  servico_vendas
 }

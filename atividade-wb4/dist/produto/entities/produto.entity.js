@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProdutoEntity = void 0;
+const vendas_produto_entity_1 = require("../../vendas_produtos/entities/vendas_produto.entity");
 const typeorm_1 = require("typeorm");
 let ProdutoEntity = class ProdutoEntity {
 };
@@ -46,6 +47,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], ProdutoEntity.prototype, "valor_total_vendas", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => vendas_produto_entity_1.VendasProduto, (venda_produto) => venda_produto.produto),
+    __metadata("design:type", Object)
+], ProdutoEntity.prototype, "produto_vendas", void 0);
 exports.ProdutoEntity = ProdutoEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'Produtos' })
 ], ProdutoEntity);

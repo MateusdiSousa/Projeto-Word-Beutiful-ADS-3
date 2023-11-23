@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VendasProduto } from 'src/vendas_produtos/entities/vendas_produto.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Produtos' })
 export class ProdutoEntity {
@@ -25,4 +26,7 @@ export class ProdutoEntity {
 
   @Column()
   valor_total_vendas: number;
+
+  @OneToMany(() => VendasProduto, (venda_produto) => venda_produto.produto)
+  produto_vendas
 }
