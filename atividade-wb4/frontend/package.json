@@ -18,6 +18,7 @@
     "react-select": "^5.8.0",
     "react-spectrum": "^1.2.6",
     "react-widgets": "^5.8.4",
+    "scss": "^0.2.4",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

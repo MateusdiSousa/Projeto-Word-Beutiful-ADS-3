@@ -21,7 +21,10 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <div>
+      <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+      </head>
       <Routes>
         <Route path='/' element={<Vendas />} />
         <Route path='/produtos' element={<TelaProduto />} />
@@ -34,7 +37,7 @@ function App() {
         <Route path='/servicos/Editar' element={<EditarServico />} />
         <Route path='/clientes/Editar' element={<EditarCliente />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
