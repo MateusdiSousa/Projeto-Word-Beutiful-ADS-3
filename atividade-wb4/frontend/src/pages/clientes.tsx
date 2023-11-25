@@ -1,84 +1,122 @@
-import { Component, ReactNode } from "react";
+import { Component, ReactNode, useState, useEffect } from "react";
 import SideBar from "../components/sidebar/sidebar";
 import { Link } from "react-router-dom";
+import CadastroCliente from "./cadastrarCliente";
+import axios from "axios";
+
+export interface ITelefone {
+    id: number,
+    ddd: String,
+    numero: String,
+    links: []
+}
+
+interface ICliente {
+    id: Number
+    nome: String
+    sobreNome: String
+    email: String
+    endereco: {
+        id: number
+        estado: String
+        cidade: String
+        bairro: String
+        rua: String
+        numero: String
+        codigoPostal: String
+        informacoesAdicionais: String
+        links: any
+    }
+    telefones: Array<ITelefone>
+
+    links: Array<
+        {
+            rel: any,
+            href: any
+        }>
+}
+
 
 function Cliente() {
+    const [clientes, setClientes] = useState<ICliente[]>([])
+
+    const getClientes = () => {
+        fetch('http://localhost:32832/clientes').then((response) => response.json())
+            .then(function (data) {
+                setClientes(data)
+            })
+    }
+
+    const excluirClientes = (id : any) => {
+        fetch('http://localhost:32832/cliente/excluir', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({id}),
+        }).then(() => {
+            alert('Cliente excluido com sucesso')
+            getClientes()
+        })
+        .catch( erro => console.log(erro))
+    }
+
+    useEffect(() => getClientes(), [])
+
+    console.log(clientes)
+
+
     return (
         <>
             <SideBar />
+
             <h1>Clientes</h1>
+            <Link to={'/clientes/cadastro'}><button className="waves-effect waves-light btn-small black-text transparent">Cadastrar Cliente</button></Link>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Gênero</th>
-                        <th>Data de Nascimento</th>
-                        <th>Compras de Produtos</th>
-                        <th>Compras de Serviços</th>
-                        <th>
-                            <Link to={'/clientes/cadastro'} className="btn-small transparent black-text">Cadastrar Cliente</Link>
-                        </th>
-                    </tr>
-                </thead>
+            {clientes.map(cliente => {
+                return (
+                    <div className="row">
+                        <div className="col s12 m6">
+                            <div className="card panel">
 
-                <tbody>
-                    <tr>
-                        <td>Claudia de Carlos Braga</td>
-                        <td>222.222.222-22</td>
-                        <td>Feminino</td>
-                        <td>07/02/1981</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
-                        <td>
-                            <Link to={'/clientes/Editar'}><button>Editar</button></Link>
-                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                        </td>
-                    </tr>
+                                <div className="card-content white-text">
+                                    <span className="card-title black-text">{cliente.nome}</span>
+                                    <p className="black-text">Email : {cliente.email}</p>
 
-                    <tr>
-                        <td>Mateus de Sousa Raimundo</td>
-                        <td>333.333.333-33</td>
-                        <td>Masculino</td>
-                        <td>09/06/2004</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
-                        <td>
-                            <Link to={'/clientes/Editar'}><button>Editar</button></Link>
-                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                        </td>
-                    </tr>
+                                    <p className="black-text">Telefone: </p>
+                                    <ul className="collection">
+                                        {cliente.telefones.map((telefone) => (
+                                            <li className="black-text collection-item" key={telefone.id}>
+                                                ({telefone.ddd})  {telefone.numero}
+                                            </li>
+                                        ))}
+                                    </ul>
 
-                    <tr>
-                        <td>Sergio álvaro de Almeida</td>
-                        <td>444.444.444-44</td>
-                        <td>Masculino</td>
-                        <td>17/05/1998</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
-                        <td>
-                            <Link to={'/clientes/Editar'}><button>Editar</button></Link>
-                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                        </td>
-                    </tr>
+                                    <p className="black-text">Endereço: </p>
+                                    <ul className="collection">
+                                        <li className="black-text collection-item">Estado: {cliente.endereco.estado}</li>
+                                        <li className="black-text collection-item">Cidade: {cliente.endereco.cidade}</li>
+                                        <li className="black-text collection-item">CEP: {cliente.endereco.codigoPostal}</li>
+                                        <li className="black-text collection-item">Bairro: {cliente.endereco.bairro}</li>
+                                        <li className="black-text collection-item">Rua: {cliente.endereco.rua}</li>
+                                        <li className="black-text collection-item">Nº: {cliente.endereco.numero}</li>
 
-                    <tr>
-                        <td>Raissa Martins de Oliveira</td>
-                        <td>555.555.555-55</td>
-                        <td>Feminino</td>
-                        <td>22/03/2003</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
-                        <td>
-                            <Link to={'/clientes/Editar'}><button>Editar</button></Link>
-                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+                                    </ul>
+
+
+
+                                </div>
+                                <div className="card-action">
+                                    <button onClick={() => excluirClientes(cliente.id)} className="waves-effect waves-light btn-small white-text blue">Editar</button>
+                                    <button onClick={() => excluirClientes(cliente.id)} className="waves-effect waves-light btn-small white-text red">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
         </>
     );
 }
-
 export default Cliente;
