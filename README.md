@@ -18,7 +18,7 @@ Repositório para as atividades em DUPLA da disciplina Programação Orientada a
 * 1<a href="#1"> atvi-wb-typescript ✅</a>
 * 2<a href="#2"> atvii-wb-typescript ✅</a>
 * 3<a href="#3"> atviii-wb-typescript ✅</a>
-* 4<a href="#4"> atviv-wb-typescript 🚧</a>
+* 4<a href="#4"> atviv-wb-typescript ✅</a>
 * 5<a href="#5"> atvv-wb-typescript 🚧</a>
 
 <span id="1">
