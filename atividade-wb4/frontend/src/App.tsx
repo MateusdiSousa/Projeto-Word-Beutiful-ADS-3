@@ -32,9 +32,9 @@ function App() {
       <Route path='/produtos/cadastro' element={<CadastroProduto />} />
       <Route path='/servicos/cadastro' element={<CadastroServico />} />
       <Route path='/clientes/cadastro' element={<CadastroCliente />} />
-      <Route path='/produtos/Editar' element={<EditarProduto />} />
-      <Route path='/servicos/Editar' element={<EditarServico />} />
-      <Route path='/clientes/Editar' element={<EditarCliente />} />
+      <Route path='/produtos/Editar/:id' element={<EditarProduto />} />
+      <Route path='/servicos/Editar/:id' element={<EditarServico />} />
+      <Route path='/clientes/Editar/:id' element={<EditarCliente />} />
     </Routes>
   </>
   );

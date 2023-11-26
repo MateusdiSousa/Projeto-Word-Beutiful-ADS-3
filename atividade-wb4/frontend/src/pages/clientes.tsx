@@ -6,27 +6,28 @@ import axios from "axios";
 
 export interface ITelefone {
     id: number,
-    ddd: String,
-    numero: String,
-    links: []
+    ddd: string,
+    numero: string,
 }
 
-interface ICliente {
+export interface IEndereco {
+    id: number
+    estado: string
+    cidade: string
+    bairro: string
+    rua: string
+    numero: string
+    codigoPostal: string
+    informacoesAdicionais: string
+    links: any
+}
+
+export interface ICliente {
     id: Number
-    nome: String
-    sobreNome: String
-    email: String
-    endereco: {
-        id: number
-        estado: String
-        cidade: String
-        bairro: String
-        rua: String
-        numero: String
-        codigoPostal: String
-        informacoesAdicionais: String
-        links: any
-    }
+    nome: string
+    sobreNome: string
+    email: string
+    endereco: IEndereco
     telefones: Array<ITelefone>
 
     links: Array<
@@ -108,7 +109,7 @@ function Cliente() {
 
                                 </div>
                                 <div className="card-action">
-                                    <button onClick={() => excluirClientes(cliente.id)} className="waves-effect waves-light btn-small white-text blue">Editar</button>
+                                    <Link to={`/clientes/editar/${cliente.id}`}><button className="waves-effect waves-light btn-small white-text blue">Editar</button></Link>
                                     <button onClick={() => excluirClientes(cliente.id)} className="waves-effect waves-light btn-small white-text red">Excluir</button>
                                 </div>
                             </div>
