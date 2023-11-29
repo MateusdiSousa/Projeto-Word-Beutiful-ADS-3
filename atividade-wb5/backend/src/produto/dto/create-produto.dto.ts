@@ -1,6 +1,6 @@
 export class CreateProdutoDto {
   nome: string;
-  desc: string;
+  descricao: string;
   preco: number;
   quantidade_vendas: number;
   quantidade_vendas_masculino: number;
