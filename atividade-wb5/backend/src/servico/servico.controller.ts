@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  ParseUUIDPipe,
+  Put
 } from '@nestjs/common';
 import { ServicoService } from './servico.service';
 import { CreateServicoDto } from './dto/create-servico.dto';
@@ -14,7 +16,7 @@ import { CreateServicoDto } from './dto/create-servico.dto';
 export class ServicoController {
   constructor(private readonly servicoService: ServicoService) {}
 
-  @Post('cadastrar')
+  @Post()
   async create(@Body() createServicoDto: CreateServicoDto) {
     return await this.servicoService.create(createServicoDto);
   }
@@ -25,12 +27,17 @@ export class ServicoController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.servicoService.findOne(+id);
+  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.servicoService.findOne(id);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.servicoService.remove(+id);
+  async remove(@Param('id', new ParseUUIDPipe) id: string) {
+    return await this.servicoService.remove(id);
+  }
+
+  @Put(':id')
+  async update(@Param('id', new ParseUUIDPipe) id: string, @Body() body : CreateServicoDto){
+    return await this.servicoService.update(id, body)
   }
 }
