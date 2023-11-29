@@ -12,18 +12,22 @@ export class ServicoService {
   ) {}
 
   async create(servicoDto: CreateServicoDto) {
-    return;
+    return await this.servicoRepository.save(servicoDto)
   }
 
-  findAll() {
-    return this.servicoRepository.find();
+  async findAll() {
+    return await this.servicoRepository.find();
   }
 
-  findOne(id: number) {
-    return this.servicoRepository.findBy({ id: id });
+  async findOne(id: string) {
+    return await this.servicoRepository.findBy({ id: id });
   }
 
-  remove(id: number) {
-    return this.servicoRepository.delete(id);
+  async update(id: string, data : CreateServicoDto){
+    return await this.servicoRepository.update(id, data)
+  }
+
+  async remove(id: string) {
+    return await this.servicoRepository.delete(id);
   }
 }
