@@ -3,9 +3,10 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ProdutoService } from './produto.service';
 import { CreateProdutoDto } from './dto/create-produto.dto';
@@ -26,17 +27,17 @@ export class ProdutoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.produtoService.findOne(+id);
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.produtoService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateProdutoDto: UpdateProdutoDto) {
-    return this.produtoService.update(+id, updateProdutoDto);
+    return this.produtoService.update(id, updateProdutoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.produtoService.remove(+id);
+    return this.produtoService.remove(id);
   }
 }
