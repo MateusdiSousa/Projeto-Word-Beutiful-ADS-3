@@ -8,11 +8,17 @@ var empresa_1 = __importDefault(require("../modelo/empresa"));
 var cadastroCliente_1 = __importDefault(require("../negocio/cliente/cadastroCliente"));
 var comprarProduto_1 = __importDefault(require("../negocio/cliente/comprarProduto"));
 var comprarServico_1 = __importDefault(require("../negocio/cliente/comprarServico"));
+var editarCliente_1 = __importDefault(require("../negocio/cliente/editarCliente"));
 var listagemClientes_1 = __importDefault(require("../negocio/cliente/listagemClientes"));
+var removerCliente_1 = __importDefault(require("../negocio/cliente/removerCliente"));
 var cadastrarProduto_1 = __importDefault(require("../negocio/produto/cadastrarProduto"));
+var editarProduto_1 = __importDefault(require("../negocio/produto/editarProduto"));
 var listagemProduto_1 = __importDefault(require("../negocio/produto/listagemProduto"));
+var removerProduto_1 = __importDefault(require("../negocio/produto/removerProduto"));
 var cadastroServico_1 = __importDefault(require("../negocio/servico/cadastroServico"));
+var editarServico_1 = __importDefault(require("../negocio/servico/editarServico"));
 var listagemServico_1 = __importDefault(require("../negocio/servico/listagemServico"));
+var removerServico_1 = __importDefault(require("../negocio/servico/removerServico"));
 var teste_1 = require("../negocio/teste");
 console.log("Bem-vindo ao cadastro de clientes do Grupo World Beauty");
 var empresa = new empresa_1.default();
@@ -27,7 +33,13 @@ while (execucao) {
     console.log("6 - Listar produto");
     console.log("7 - Comprar Produto");
     console.log("8 - Comprar Servi\u00E7o");
-    console.log("9 - Criar ambiente de teste");
+    console.log("9 - Editar Cliente");
+    console.log("10 - Editar Servico");
+    console.log("11 - Editar Produto");
+    console.log("12 - Remover Cliente");
+    console.log("13 - Remover Servico");
+    console.log("14 - Remover Produto");
+    console.log("15 - Criar ambiente de teste");
     console.log("0 - Sair");
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -67,6 +79,33 @@ while (execucao) {
             comprarServico.comprar();
             break;
         case 9:
+            var editarCliente = new editarCliente_1.default();
+            editarCliente.selecionarCliente(empresa.getClientes);
+            editarCliente.editar();
+            break;
+        case 10:
+            var editarServico = new editarServico_1.default();
+            editarServico.selecionarServico(empresa.getServicos);
+            editarServico.editar();
+            break;
+        case 11:
+            var editarProduto = new editarProduto_1.default();
+            editarProduto.selecionarProduto(empresa.getProdutos);
+            editarProduto.editar();
+            break;
+        case 12:
+            var removerCliente = new removerCliente_1.default();
+            removerCliente.remover(empresa.getClientes);
+            break;
+        case 13:
+            var removerProdutos = new removerProduto_1.default();
+            removerProdutos.remover(empresa.getProdutos);
+            break;
+        case 14:
+            var removerServicos = new removerServico_1.default();
+            removerServicos.remover(empresa.getServicos);
+            break;
+        case 15:
             var teste = new teste_1.Teste(empresa.getServicos, empresa.getProdutos, empresa.getClientes);
             teste.ContruirAmbiente();
             break;

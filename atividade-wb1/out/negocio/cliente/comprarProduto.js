@@ -30,7 +30,7 @@ var ComprarProduto = /** @class */ (function (_super) {
         return _this;
     }
     ComprarProduto.prototype.selecionarCliente = function (clientes) {
-        console.log("Selecione o cliente que realizará a compra");
+        console.log("\nSelecione o cliente que realizará a compra");
         console.log("-------------------------------------------");
         clientes.forEach(function (cliente) {
             console.log("".concat(clientes.indexOf(cliente) + 1, " - nome : ").concat(cliente.nome));

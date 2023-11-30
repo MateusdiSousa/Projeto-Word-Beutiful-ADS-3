@@ -20,15 +20,15 @@ export default class Cliente {
     private totalGastoServico : number;
     private totalGasto: number;
 
-    constructor(nome: string, nomeSocial: string, cpf: CPF, genero : string) {
+    constructor(nome: string, nomeSocial: string, cpf: CPF, genero : string, rgs : Array<RG>, telefones : Array<Telefone>) {
         this.genero = genero
         this.nome = nome
         this.nomeSocial = nomeSocial
         this.cpf = cpf
         this.totalGasto = 0;
-        this.rgs = []
+        this.rgs = rgs
         this.dataCadastro = new Date()
-        this.telefones = []
+        this.telefones = telefones
         this.produtosConsumidos = new Array<Produto>
         this.quantidadeProdutosConsumidos = 0;
         this.servicosConsumidos = new Array<Servico>
@@ -100,5 +100,17 @@ export default class Cliente {
 
     public set setServicosConsumidos(servico : Servico){
         this.servicosConsumidos.push(servico)
+    }
+
+    public set setCPF(cpf : CPF){
+        this.cpf = cpf
+    }
+
+    public set setRG(rgs : Array<RG>){
+        this.rgs = rgs
+    }
+
+    public set setTelefones(telefones : Array<Telefone>){
+        this.telefones = telefones
     }
 }
