@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Cliente = /** @class */ (function () {
-    function Cliente(nome, nomeSocial, cpf, genero) {
+    function Cliente(nome, nomeSocial, cpf, genero, rgs, telefones) {
         this.genero = genero;
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
         this.totalGasto = 0;
-        this.rgs = [];
+        this.rgs = rgs;
         this.dataCadastro = new Date();
-        this.telefones = [];
+        this.telefones = telefones;
         this.produtosConsumidos = new Array;
         this.quantidadeProdutosConsumidos = 0;
         this.servicosConsumidos = new Array;
@@ -139,6 +139,27 @@ var Cliente = /** @class */ (function () {
     Object.defineProperty(Cliente.prototype, "setServicosConsumidos", {
         set: function (servico) {
             this.servicosConsumidos.push(servico);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Cliente.prototype, "setCPF", {
+        set: function (cpf) {
+            this.cpf = cpf;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Cliente.prototype, "setRG", {
+        set: function (rgs) {
+            this.rgs = rgs;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Cliente.prototype, "setTelefones", {
+        set: function (telefones) {
+            this.telefones = telefones;
         },
         enumerable: false,
         configurable: true
