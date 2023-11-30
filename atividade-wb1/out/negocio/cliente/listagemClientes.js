@@ -29,8 +29,7 @@ var ListagemClientes = /** @class */ (function (_super) {
         return _this;
     }
     ListagemClientes.prototype.listar = function () {
-        console.log('');
-        console.log("1 - Listar todos");
+        console.log("\n1 - Listar todos");
         console.log("2 - Listar clientes que mais consumiram (em quantidade)");
         console.log("3 - Listar clientes menos consumiram (em quantidade)");
         console.log("4 - Listar clientes que mais consumiram");
