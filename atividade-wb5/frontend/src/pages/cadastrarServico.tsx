@@ -5,8 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Servico } from "../interfaces/servicos";
 import servicosService from "../services/servicos.service";
-import axios from "axios";
-import { api } from "../api";
 
 function CadastroServico() {
     const [nome, setNome] = useState<string>()
@@ -18,6 +16,7 @@ function CadastroServico() {
     async function handleSubmit(e) {
         e.preventDefault()
         const servico: Servico = {
+            id: null,
             nome: nome,
             descricao: desc,
             preco: preco,

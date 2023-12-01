@@ -3,7 +3,7 @@ import { Servico } from "../interfaces/servicos"
 
 
 class servicoService {
-    async findAll() : Promise<Servico>{
+    async findAll(){
         return await api.get('/servico')
     }
 

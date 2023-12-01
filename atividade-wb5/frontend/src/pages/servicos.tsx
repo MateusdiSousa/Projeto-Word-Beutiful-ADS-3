@@ -6,18 +6,18 @@ import { Servico } from "../interfaces/servicos";
 import servicosService from "../services/servicos.service";
 
 function TelaServico() {
-    const [servicos, setServico] = useState<Array<Servico>>()
+    const [servicos, setServico] = useState<Servico[]>()
 
     async function getServicos() {
-        servicosService.findAll().then( resp => {
-            setServico(resp)
-            console.log(resp)
-        }).catch( erro => {
+        servicosService.findAll().then(resp => {
+            setServico(resp.data)
+            console.log(resp.data)
+        }).catch(erro => {
             console.log(erro)
         })
     }
 
-    useEffect(() => getServicos(),[])
+    useEffect(() => { getServicos() }, [])
 
     return (
         <>
@@ -42,19 +42,29 @@ function TelaServico() {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Limpeza de pele</td>
-                        <td>Limpeza muito boa</td>
-                        <td>$80.25</td>
-                        <td>0</td>
-                        <td>$0.00</td>
-                        <td>
-                            <Link to={'/servicos/Editar'}>
-                                <button>Editar</button>
-                            </Link>
-                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                        </td>
-                    </tr>
+                    {servicos && (
+                        servicos.map((servico) => {
+                            return (
+                                <>
+                                    <tr>
+                                        <td>{servico.nome}</td>
+                                        <td>{servico.descricao}</td>
+                                        <td>${servico.preco.toFixed(2)}</td>
+                                        <td>{servico.quantidade_vendas}</td>
+                                        <td>${servico.valor_total_vendas}</td>
+                                        <td>
+                                            <Link to={'/servicos/Editar'}>
+                                                <button>Editar</button>
+                                            </Link>
+                                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
+                                        </td>
+                                    </tr>
+                                </>
+                            )
+                        })
+                    )}
+
+
                 </tbody>
             </table>
         </>
