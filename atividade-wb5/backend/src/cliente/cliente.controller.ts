@@ -6,10 +6,10 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
-import { UpdateClienteDto } from './dto/update-cliente.dto';
 
 @Controller('cliente')
 export class ClienteController {
@@ -30,9 +30,9 @@ export class ClienteController {
     return this.clienteService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
-    return this.clienteService.update(+id, updateClienteDto);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() clienteDto: CreateClienteDto) {
+    return this.clienteService.update(id, clienteDto);
   }
 
   @Delete('excluir')
