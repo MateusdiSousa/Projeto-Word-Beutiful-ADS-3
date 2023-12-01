@@ -1,9 +1,24 @@
-import { Component, ReactNode } from "react";
+import { Component, ReactNode, useEffect, useState } from "react";
 import SideBar from "../components/sidebar/sidebar";
 import { Link } from "react-router-dom";
 import  EditarServico  from "./editarServico";
+import { Produto } from "../interfaces/produtos";
+import produtosService from "../services/produtos.service";
 
 function TelaProduto() {
+    const [produto, setProduto] = useState<Produto[]>()
+
+    async function getProduto() {
+        produtosService.findAll().then(resp => {
+            setProduto(resp.data)
+            console.log(resp.data)
+        }).catch(erro => {
+            console.log(erro)
+        })
+    }
+
+    useEffect(() => { getProduto() }, [])
+
     return (
         <>
             <SideBar />
@@ -28,61 +43,27 @@ function TelaProduto() {
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>Depilação</td>
-                            <td>Depilação muito boa</td>
-                            <td>$80.25</td>
-                            <td>0</td>
-                            <td>$0.00</td>
-                            <td>
-                                <Link to={'/produtos/Editar'}>
-                                    <button>Editar</button>
-                                </Link>
-                                <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Manicure</td>
-                            <td>Manicure muito boa</td>
-                            <td>$80.25</td>
-                            <td>0</td>
-                            <td>$0.00</td>
-                            <td>
-                                <Link to={'/produtos/Editar'}>
-                                    <button>Editar</button>
-                                </Link>
-                                <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Limpeza de pele</td>
-                            <td>Limpeza muito boa</td>
-                            <td>$80.25</td>
-                            <td>0</td>
-                            <td>$0.00</td>
-                            <td>
-                                <Link to={'/produtos/Editar'}>
-                                    <button>Editar</button>
-                                </Link>
-                                <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Pintura de Cabelo</td>
-                            <td>Uma tinta muito boa</td>
-                            <td>$80.25</td>
-                            <td>0</td>
-                            <td>$0.00</td>
-                            <td>
-                                <Link to={'/produtos/Editar'}>
-                                    <button>Editar</button>
-                                </Link>
-                                <button>Deletar</button>
-                            </td>
-                        </tr>
+                        {produto && (
+                            produto.map((produto) => {
+                                return (
+                                    <>
+                                        <tr>
+                                            <td>{produto.nome}</td>
+                                            <td>{produto.descricao}</td>
+                                            <td>${produto.preco.toFixed(2)}</td>
+                                            <td>{produto.quantidade_vendas}</td>
+                                            <td>${produto.valor_total_vendas}</td>
+                                            <td>
+                                                <Link to={'/produto/Editar'}>
+                                                    <button>Editar</button>
+                                                </Link>
+                                                <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
+                                            </td>
+                                        </tr>
+                                    </>
+                                )
+                            })
+                        )}
                     </tbody>
                 </table>
             </main>
