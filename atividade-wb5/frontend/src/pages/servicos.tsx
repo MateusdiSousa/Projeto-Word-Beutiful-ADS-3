@@ -1,12 +1,13 @@
 import { Component, ReactNode } from "react";
 import SideBar from "../components/sidebar/sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
-import { Servico } from "../interfaces/servicos";
+import { Servico, ServicoI } from "../interfaces/servicos";
 import servicosService from "../services/servicos.service";
 
 function TelaServico() {
-    const [servicos, setServico] = useState<Servico[]>()
+    const [servicos, setServico] = useState<ServicoI[]>()
+    const nav = useNavigate()
 
     async function getServicos() {
         servicosService.findAll().then(resp => {
@@ -19,6 +20,19 @@ function TelaServico() {
 
     useEffect(() => { getServicos() }, [])
 
+    const redirectoEdit = (servico) => {
+        nav("/servicos/Editar", { state: { key: servico } })
+    }
+
+    async function deleteServico(id: string | undefined) {
+
+        await servicosService.delete(id).then(resp => {
+            getServicos()
+        }).catch(erro => {
+            console.log(erro)
+        })
+
+    }
     return (
         <>
             <SideBar />
@@ -53,10 +67,14 @@ function TelaServico() {
                                         <td>{servico.quantidade_vendas}</td>
                                         <td>${servico.valor_total_vendas}</td>
                                         <td>
-                                            <Link to={'/servicos/Editar'}>
-                                                <button>Editar</button>
-                                            </Link>
-                                            <button onClick={() => alert('Deletado com sucesso')}>Deletar</button>
+                                            <button onClick={() => { redirectoEdit(servico) }}>Editar</button>
+                                            <button onClick={() => {
+                                                let confi = window.confirm('Você deseja realmente deletar esse servico')
+                                                if (confi) {
+                                                    deleteServico(servico.id)
+                                                }
+                                            }
+                                            }>Deletar</button>
                                         </td>
                                     </tr>
                                 </>

@@ -8,7 +8,6 @@ function CadastroProduto() {
     const [nome, setNome] = useState<string>()
     const [descricao, setDesc] = useState<string>()
     const [preco, setPreco] = useState<number>()
-
     const nav = useNavigate()
 
     async function handleSubmit(e) {

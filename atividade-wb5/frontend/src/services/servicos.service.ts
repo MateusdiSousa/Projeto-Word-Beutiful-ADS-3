@@ -1,5 +1,5 @@
 import { api } from "../api"
-import { Servico } from "../interfaces/servicos"
+import { Servico, ServicoI } from "../interfaces/servicos"
 
 
 class servicoService {
@@ -13,6 +13,14 @@ class servicoService {
 
     async post(servico : Servico){
         return await api.post('servico', servico)
+    }
+
+    async update(servico : ServicoI){
+        return  await api.put(`servico/${servico.id}`,servico)
+    }
+
+    async delete(id : string | undefined){
+        return await api.delete(`servico/${id}`)
     }
 }
 
