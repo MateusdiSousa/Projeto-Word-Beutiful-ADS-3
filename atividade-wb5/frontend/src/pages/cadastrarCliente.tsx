@@ -1,29 +1,47 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SideBar from "../components/sidebar/sidebar";
-import { Link } from "react-router-dom";
-import Combobox from "react-widgets/Combobox";
-import DataPicker from "react-widgets/DatePicker";
-import axios from "axios"
+import { Link, useNavigate } from "react-router-dom";
+import { Cliente } from "../interfaces/clientes";
+import clientesService from "../services/clientes.service";
 
 interface telefone {
-    ddd: string
-    numero: string
+    numero: Number
 }
 
 function CadastroCliente() {
     const [nome, setNome] = useState<string>()
-    const [sobrenome, setSobrenome] = useState<string>()
-    const [estado, setEstado] = useState<string>()
-    const [cidade, setCidade] = useState<string>()
-    const [bairro, setBairro] = useState<string>()
-    const [rua, setRua] = useState<string>()
-    const [numero, setNumero] = useState<number>()
-    const [codigoPostal, setCodigoPostal] = useState<string>()
-    const [informacoesAdicionais, setInformacoesAdicionais] = useState<string>()
-    const [telefoneDTO, setTelefone] = useState<telefone[]>([])
-    const [telefoneDDD, setTelefoneDDD] = useState<string>()
-    const [telefoneNum, setTelefoneNum] = useState<string>()
-    const [emailCliente, setEmailCliente] = useState<string>()
+    const [nomesocial, setNomeSocial] = useState<string>()
+    const [genero, setGenero] = useState<string>()
+    const [cpf, setCpf] = useState<string>()
+    const [rg, setRg] = useState<string>()
+    const [dataCadastro, setDataCadastro] = useState<Date>()
+    const [telefone, setTelefone] = useState<string>()
+
+    const nav = useNavigate()
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const cliente: Cliente = {
+            nome: nome,
+            nomeSocial: nomesocial,
+            genero: genero,
+            cpf: cpf,
+            rg: rg,
+            dataCadastro: new Date(),
+            telefone: telefone,
+            quantidade_produtos_consumidos: 0,
+            quantidade_servicos_consumidos: 0,
+            total_gasto_produto: 0,
+            total_gasto_servico: 0,
+            total_gasto: 0,
+        }
+
+        clientesService.create(cliente).then(resp => {
+            console.log(resp.data)
+            nav('clientes')
+        })
+
+    }
 
     return (
         <>
@@ -43,73 +61,44 @@ function CadastroCliente() {
 
                         <div className="row">
                             <div className="input-field col s10">
-                                <input onChange={(e) => setSobrenome(e.target.value)} id="middle_name" type="text" className="validate"></input>
-                                <label >Sobrenome</label>
+                                <input onChange={(e) => setNomeSocial(e.target.value)} id="social_name" type="text" className="validate"></input>
+                                <label >Nome Social</label>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="input-field col s10">
-                                <input onChange={(e) => setEmailCliente(e.target.value)} id="middle_name" type="email" className="validate"></input>
-                                <label >Email</label>
+                                <input onChange={(e) => setGenero(e.target.value)} id="genero" type="text" className="validate"></input>
+                                <label >Gênero</label>
                             </div>
                         </div>
 
                         <div className="row">
-                            <h5>Endereço</h5>
-                            <div>
-                                <div className="input-field col s5">
-                                    <input className="validate" type="text" onChange={(e) => setEstado(e.target.value)} id="estado"></input>
-                                    <label>Estado</label>
-                                </div>
-
-                                <div className="input-field col s5">
-                                    <input className="validate" type="text" onChange={(e) => setCidade(e.target.value)} id="cidade"></input>
-                                    <label>Cidade</label>
-                                </div>
-
-                                <div className="input-field col s5">
-                                    <input className="validate" type="text" onChange={(e) => setBairro(e.target.value)} id="bairro"></input>
-                                    <label>Bairro</label>
-                                </div>
-
-                                <div className="input-field col s5">
-                                    <input className="validate" type="text" onChange={(e) => setRua(e.target.value)} id="rua"></input>
-                                    <label>Rua</label>
-                                </div>
-
-                                <div className="input-field col s5">
-                                    <input id="numero" className="validate" onChange={(e) => setNumero(e.target.valueAsNumber)} type="text"></input>
-                                    <label>Número</label>
-                                </div>
-
-                                <div className="input-field col s5">
-                                    <input className="validate" type="text" onChange={(e) => setCodigoPostal(e.target.value)} id="CEP"></input>
-                                    <label>CEP</label>
-                                </div>
-
-                                <div className="input-field col s5">
-                                    <input className="validate" type="text" onChange={(e) => setInformacoesAdicionais(e.target.value)} id="informacoes_adicionais"></input>
-                                    <label>Informacoes Adicionais</label>
-                                </div>
-
+                            <div className="input-field col s10">
+                                <input className="validate" type="number" onChange={(e) => setCpf (e.target.value)} id="cpf"></input>
+                                <label>CPF:</label>
                             </div>
                         </div>
 
                         <div className="row">
-                            <input className="validate" type="text" onChange={(e) => setTelefoneDDD(e.target.value)} />
-                            <label>DDD</label>
-
-                            <input className="validate" type="text" onChange={(e) => setTelefoneNum(e.target.value)} />
-                            <label>Telefone</label>
+                            <div className="input-field col s10">
+                                <input className="validate" type="number" onChange={(e) => setRg (e.target.value)} id="rg"></input>
+                                <label>RG:</label>
+                            </div>
                         </div>
 
                         <div className="row">
+                            <div className="input-field col s10">
+                            <input className="validate" type="Date" onChange={(e) => setDataCadastro(new Date(e.target.value))} id="data_cadastro"></input>
+                            <label>Data de Cadastro: </label>
+                            </div>
+                        </div>
 
-                            <button type="button" onClick={ () => {
-                                    telefoneDTO.push({ ddd: telefoneDDD, numero: telefoneNum })
-                                    alert('número adicionado')
-                                }} className="btn waves-effect transparent black-text btn-small" >Adicionar numero</button>
+                        <div className="row">
+                            <div className="input-field col s10">
+                            <input className="validate" type="number" onChange={(e) => setTelefone(e.target.value)} id="telefone"></input>
+                            <label>Telefone: </label>
+                            </div>
                         </div>
 
                         <div className="row">
@@ -117,9 +106,10 @@ function CadastroCliente() {
                                 <i className="material-icons right  ">send</i>
                             </button>
                         </div>
+
                     </form>
-                </div >
-            </div >
+                </div>
+            </div>
         </>
     );
 }
