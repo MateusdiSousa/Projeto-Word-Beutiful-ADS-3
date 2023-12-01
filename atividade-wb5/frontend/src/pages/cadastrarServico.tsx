@@ -1,5 +1,3 @@
-import { Sidenav } from "materialize-css";
-import { Component } from "react";
 import SideBar from "../components/sidebar/sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -16,7 +14,6 @@ function CadastroServico() {
     async function handleSubmit(e) {
         e.preventDefault()
         const servico: Servico = {
-            id: null,
             nome: nome,
             descricao: desc,
             preco: preco,
