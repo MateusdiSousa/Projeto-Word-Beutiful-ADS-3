@@ -1,3 +1,5 @@
+import { RgEntity } from 'src/cliente/entities/rg.entity';
+import { TelefoneEntity } from 'src/cliente/entities/telefone.entity';
 import { VendasProduto } from 'src/vendas_produtos/entities/vendas_produto.entity';
 import { VendasServico } from 'src/vendas_servicos/entities/vendas_servico.entity';
 import {
@@ -10,8 +12,8 @@ import {
 
 @Entity({ name: 'Clientes' })
 export class ClienteEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   nome: string;
@@ -26,27 +28,21 @@ export class ClienteEntity {
   cpf: number;
 
   @Column()
-  rg: number;
-
-  @Column()
   dataCadastro: Date;
 
-  @Column()
-  telefone: number;
-
-  @Column()
+  @Column({default : 0})
   quantidade_produtos_consumidos: number;
 
-  @Column()
+  @Column({default : 0})
   quantidade_servicos_consumidos: number;
 
-  @Column()
+  @Column({default : 0})
   total_gasto_produto: number;
 
-  @Column()
+  @Column({default : 0})
   total_gasto_servico: number;
 
-  @Column()
+  @Column({default : 0})
   total_gasto: number;
 
   @OneToMany(() => VendasProduto, (produtos_consumidos) => produtos_consumidos.cliente)
@@ -54,4 +50,10 @@ export class ClienteEntity {
 
   @OneToMany(() => VendasServico, (servicos_consumidos) => servicos_consumidos.cliente)
   servicos_consumidos : VendasServico[]
+
+  @OneToMany(() => TelefoneEntity, (telefone) => telefone.cliente)
+  telefones : TelefoneEntity[]
+
+  @OneToMany(() => RgEntity, (rg) => rg.cliente)
+  rgs : RgEntity[]
 }
