@@ -18,3 +18,9 @@ export interface ServicoI {
     quantidade_vendas_feminino: number;
     valor_total_vendas: number;
 }
+
+export interface ServicoVenda {
+    servico : ServicoI
+    quantidade : number
+    valor_total : number
+}

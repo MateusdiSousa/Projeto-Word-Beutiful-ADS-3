@@ -2,9 +2,121 @@ import { Component } from 'react'
 import SideBar from '../components/sidebar/sidebar'
 import Combobox from "react-widgets/Combobox"
 import NumberPicker from 'react-widgets/NumberPicker'
+import { ServicoI, ServicoVenda } from '../interfaces/servicos'
+import { useState } from 'react'
+import { ProdutoI, ProdutoVenda } from '../interfaces/produtos'
+import servicosService from '../services/servicos.service'
+import produtosService from '../services/produtos.service'
+import { useEffect } from 'react'
 
 
 function Vendas() {
+    const [servicosCombo, setServicoCombo] = useState<ServicoI[]>()
+    const [produtosCombo, setProdutoCombo] = useState<ProdutoI[]>()
+
+    const [servicoSelect, setServicoSelect] = useState<ServicoI>()
+    const [produtoSelect, setProdutoSelect] = useState<ProdutoI>()
+
+    const [produtos, setProduto] = useState<ProdutoVenda[]>([])
+    const [servicos, setServico] = useState<ServicoVenda[]>([])
+    const [valorTotal, setValorTotal] = useState<number>(0)
+
+
+
+    async function addServicos() {
+        const servico: ServicoVenda = {
+            servico: servicoSelect,
+            quantidade: 0,
+            valor_total: 0,
+        }
+        if (servicos.some(item => item.servico.id == servico.servico.id)) {
+            alert('Item já está na lista de compras')
+        } else {
+            setServico([...servicos, servico])
+        }
+    }
+
+    async function addProdutos() {
+        const produto: ProdutoVenda = {
+            produto: produtoSelect,
+            quantidade: 0,
+            valor_total: 0,
+        }
+        if (produtos.some(item => item.produto.id == produto.produto.id)) {
+            alert('Item já está na lista de compras')
+        } else {
+            setProduto([...produtos, produto])
+        }
+    }
+
+    async function setValues() {
+        await servicosService.findAll().then((resp) => {
+            setServicoCombo(resp.data)
+            console.log(resp.data)
+        }).catch(erro => console.log(erro))
+
+        await produtosService.findAll().then((resp) => {
+            setProdutoCombo(resp.data)
+            console.log(resp.data)
+        }).catch(erro => console.log(erro))
+    }
+
+    async function ComboBoxChangeServico(value) {
+        const objeto = servicosCombo.find((item: ServicoI) => item.id === value.id)
+        setServicoSelect(objeto)
+    }
+
+    async function ComboBoxChangeProduto(value) {
+        const objeto = produtosCombo.find((item: ProdutoI) => item.id === value.id)
+        setProdutoSelect(objeto)
+    }
+
+    async function ChangeValorTotalServico(idServico: string | undefined, value) {
+        const newLista = servicos.map((data: ServicoVenda) => {
+            if (data.servico.id == idServico) {
+                console.log(value)
+                return { ...data, quantidade: value, valor_total: data.servico.preco * value }
+            }
+            return data
+        })
+        console.log(newLista)
+        setServico(newLista)
+
+        ChangeValorTotal(newLista, produtos)
+    }
+
+    async function ChangeValorTotalProduto(idProduto: string | undefined, value) {
+        const newLista = produtos.map((produto) => {
+            if (produto.produto.id == idProduto) {
+                console.log(value)
+                return { ...produto, quantidade: value, valor_total: produto.produto.preco * value }
+            }
+        })
+        console.log(newLista)
+        setProduto(newLista)
+
+        ChangeValorTotal(servicos, newLista)
+    }
+
+    async function ChangeValorTotal(servicos: ServicoVenda[], produtos: ProdutoVenda[]) {
+        const valorServicos = servicos.reduce((acumulador, servico) => {
+            console.log(`${servico.servico.nome}: ${servico.valor_total}`)
+            return acumulador + servico.valor_total
+        }, 0)
+
+        const valorProdutos = produtos.reduce((acumulador, produto) => {
+            return acumulador + produto.valor_total
+        }, 0)
+
+        console.log(valorServicos)
+
+        setValorTotal(valorProdutos + valorServicos)
+    }
+
+    useEffect(() => {
+        setValues()
+    }, [])
+
     return (
         <>
             <SideBar />
@@ -21,16 +133,22 @@ function Vendas() {
                     <div className='col s4 m3'>
                         <Combobox
                             placeholder='Serviços'
-                            data={["Depilaçao", "Massagem", "Limpeza de Pele", "Manicure"]}
+                            data={servicosCombo}
+                            textField={'nome'}
+                            dataKey={'id'}
+                            onChange={valor => ComboBoxChangeServico(valor)}
                         />
-                        <button className='btn-small amber lighten-1'>adicionar</button>
+                        <button onClick={() => addServicos()} className='btn-small amber lighten-1'>adicionar</button>
                     </div>
                     <div className='col s4 m3'>
                         <Combobox
                             placeholder='Produtos'
-                            data={["Hidratante", "Condicionador", "Shampoo", ""]}
+                            data={produtosCombo}
+                            textField={'nome'}
+                            dataKey={'id'}
+                            onChange={valor => ComboBoxChangeProduto(valor)}
                         />
-                        <button className='btn-small amber lighten-1'>adicionar</button>
+                        <button onClick={() => addProdutos()} className='btn-small amber lighten-1'>adicionar</button>
                     </div>
                 </div>
 
@@ -47,28 +165,52 @@ function Vendas() {
                         </thead>
 
                         <tbody >
-                            <tr>
-                                <td>Massagem</td>
-                                <td ><NumberPicker defaultValue={1} className='col s2' /></td>
-                                <td>$90.87</td>
-                            </tr>
-                            <tr>
-                                <td>Creme de Barbear</td>
-                                <td><NumberPicker defaultValue={1} className='col s2' /></td>
-                                <td>$15.45</td>
-                            </tr>
-                            <tr>
+
+                            {servicos && (
+                                servicos.map(servico => {
+                                    return (
+                                        <tr>
+                                            <td>{servico.servico.nome}</td>
+                                            <td><NumberPicker
+                                                onChange={(value) => {
+                                                    ChangeValorTotalServico(servico.servico.id, value)
+                                                }}
+                                                min={0}
+                                                className='col s2 ' /></td>
+                                            <td>R$ {servico.servico.preco.toFixed(2)}</td>
+                                        </tr>
+                                    )
+                                })
+                            )}
+
+                            {produtos && (
+                                produtos.map(produto => {
+                                    return (
+                                        <tr>
+                                            <td>{produto.produto.nome}</td>
+                                            <td><NumberPicker
+                                                onChange={(value) => {
+                                                    ChangeValorTotalProduto(produto.produto.id, value)
+                                                }}
+                                                min={0}
+                                                defaultValue={0} className='col s2 ' /></td>
+                                            <td>R$ {produto.produto.preco.toFixed(2)}</td>
+                                        </tr>
+                                    )
+                                })
+                            )}
+                            {/* <tr>
                                 <td>Shampoo</td>
                                 <td><NumberPicker defaultValue={1} className='col s2 '  /></td>
                                 <td>$8.00</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>
 
                 <div className='finalizar'>
                     <div className='preco-total'>
-                        <h5>Preço Total: xxxx,xx</h5>
+                        <h5>Preço Total: R$ {valorTotal.toFixed(2)}</h5>
                     </div>
 
                     <button onClick={() => alert('Venda realizada')} className='waves-effect waves-light btn yellow lighten-1 '>Finalizar Venda</button>

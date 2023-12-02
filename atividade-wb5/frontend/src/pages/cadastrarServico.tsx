@@ -54,7 +54,7 @@ function CadastroServico() {
                         </div>
                         <div className="row">
                             <div className="input-field col s10">
-                                <input onChange={(e) => setPreco(Number(e.target.value))} id="first_name" type="number" className="validate"></input>
+                                <input onChange={(e) => setPreco(parseFloat(e.target.value))} id="preco" type="number" className="validate"></input>
                                 <label >Preço do Serviço</label>
                             </div>
                         </div>
