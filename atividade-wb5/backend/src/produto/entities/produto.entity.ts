@@ -12,7 +12,7 @@ export class ProdutoEntity {
   @Column()
   descricao: string;
 
-  @Column()
+  @Column({type : 'float'})
   preco: number;
 
   @Column()
@@ -24,7 +24,7 @@ export class ProdutoEntity {
   @Column()
   quantidade_vendas_feminino: number;
 
-  @Column()
+  @Column({type : 'float'})
   valor_total_vendas: number;
 
   @OneToMany(() => VendasProduto, (venda_produto) => venda_produto.produto)

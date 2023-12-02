@@ -12,8 +12,8 @@ export class ServicoEntity {
   @Column()
   descricao: string;
 
-  @Column()
-  preco: number;
+  @Column({type : 'float'})
+  preco: Number;
 
   @Column()
   quantidade_vendas: number;
@@ -24,7 +24,7 @@ export class ServicoEntity {
   @Column()
   quantidade_vendas_feminino: number;
 
-  @Column()
+  @Column({type : 'float'})
   valor_total_vendas: number;
 
   @OneToMany(() => VendasServico , (vendas) => vendas.servico)

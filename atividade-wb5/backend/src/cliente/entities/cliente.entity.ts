@@ -36,13 +36,13 @@ export class ClienteEntity {
   @Column({default : 0})
   quantidade_servicos_consumidos: number;
 
-  @Column({default : 0})
+  @Column({default : 0, type : 'float'})
   total_gasto_produto: number;
 
-  @Column({default : 0})
+  @Column({default : 0, type : 'float'})
   total_gasto_servico: number;
 
-  @Column({default : 0})
+  @Column({default : 0, type : 'float'})
   total_gasto: number;
 
   @OneToMany(() => VendasProduto, (produtos_consumidos) => produtos_consumidos.cliente)

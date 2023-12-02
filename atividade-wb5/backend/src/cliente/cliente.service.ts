@@ -44,12 +44,22 @@ export class ClienteService {
   }
 
   async findAll() {
-
-    return await this.clienteRepository.find();
+    return await this.clienteRepository.find({
+      relations : {
+        rgs : true,
+        telefones : true
+      }
+    });
   }
 
   async findOne(id: string) {
-    return await this.clienteRepository.findOneBy({id : id});
+    return await this.clienteRepository.find({
+      relations : {
+        rgs : true,
+        telefones : true
+      },
+      where : {id : id}
+    });
   }
 
   async update(id: string, clienteDto: CreateClienteDto) {

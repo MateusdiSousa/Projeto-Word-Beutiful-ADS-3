@@ -11,7 +11,7 @@ export class VendasServico {
     @Column()
     quantidade : number
 
-    @Column()
+    @Column({type : 'float'})
     valor_total : number
 
     @ManyToOne(() => ClienteEntity, (cliente) => cliente.servicos_consumidos)
