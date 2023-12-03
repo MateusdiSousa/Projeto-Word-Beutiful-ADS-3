@@ -1,4 +1,4 @@
 export interface Rg{
      numero: string;
-     date_de_emissao: string;
+     data_de_emissao: Date;
 }
