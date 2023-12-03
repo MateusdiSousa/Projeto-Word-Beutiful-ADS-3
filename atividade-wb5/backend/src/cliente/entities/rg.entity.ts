@@ -6,7 +6,7 @@ export class RgEntity {
 @PrimaryGeneratedColumn('uuid')
 id : string
 
-@Column()
+@Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 dataEmissão : Date
 
 @Column()

@@ -23,23 +23,29 @@ export class ClienteService {
     user.nomeSocial = createClienteDto.nomeSocial
     user.genero = createClienteDto.genero
     user.dataCadastro = createClienteDto.dataCadastro
-    this.clienteRepository.save(user)
+    user.cpf = createClienteDto.cpf
+    user.quantidade_produtos_consumidos = createClienteDto.quantidade_produtos_consumidos
+    user.quantidade_servicos_consumidos = createClienteDto.quantidade_servicos_consumidos
+    user.total_gasto = createClienteDto.total_gasto
+    user.total_gasto_produto = createClienteDto.total_gasto_produto
+    user.total_gasto_servico = createClienteDto.total_gasto_servico
+
+    this.clienteRepository.manager.save(user)
+
     
-    const rgs = new Array<RgEntity>
     createClienteDto.rgs.forEach(rg => {
       const newRg = new RgEntity
       newRg.cliente = user
       newRg.dataEmissão = rg.dataEmissao
       newRg.numero = rg.numero
-      this.RgsRepository.save(newRg)
+      this.RgsRepository.manager.save(newRg)
     })
 
-    const telefones = new Array<TelefoneEntity>
     createClienteDto.telefones.forEach( telefone => {
       const newTelefone = new TelefoneEntity()
       newTelefone.cliente = user
       newTelefone.telefone = `(${telefone.ddd}) ${telefone.numero}`
-      this.telefoneRepository.save(newTelefone)
+      this.telefoneRepository.manager.save(newTelefone)
     })
   }
 

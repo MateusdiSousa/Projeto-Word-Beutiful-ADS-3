@@ -25,7 +25,7 @@ export class ClienteEntity {
   nomeSocial: string;
 
   @Column()
-  cpf: number;
+  cpf: string;
 
   @Column()
   dataCadastro: Date;

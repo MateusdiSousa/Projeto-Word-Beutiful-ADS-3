@@ -9,13 +9,15 @@ import DatePicker from "react-widgets/DatePicker";
 import Combobox from "react-widgets/Combobox";
 
 function CadastroCliente() {
-    const [nome, setNome] = useState<string>()
-    const [nomesocial, setNomeSocial] = useState<string>()
-    const [genero, setGenero] = useState<string>()
-    const [cpf, setCpf] = useState<string>()
+    const [nome, setNome] = useState<string>('')
+    const [nomesocial, setNomeSocial] = useState<string>('')
+    const [genero, setGenero] = useState<string>('Outro')
+    const [cpf, setCpf] = useState<string>('')
+
     const [rgs, setRgs] = useState<Rg[]>([])
     const [numeroRg, setNumeroRg] = useState<string>()
     const [dataEmissao, setDataEmissao] = useState<Date>()
+
     const [telefones, setTelefones] = useState<Telefone[]>([])
     const [ddd, setDdd] = useState<string>()
     const [numero, setNumero] = useState<string>()
@@ -29,9 +31,9 @@ function CadastroCliente() {
             nomeSocial: nomesocial,
             genero: genero,
             cpf: cpf,
-            rg: rgs,
+            rgs: rgs,
             dataCadastro: new Date(),
-            telefone: telefones,
+            telefones: telefones,
             quantidade_produtos_consumidos: 0,
             quantidade_servicos_consumidos: 0,
             total_gasto_produto: 0,
@@ -40,8 +42,8 @@ function CadastroCliente() {
         }
 
         clientesService.create(cliente).then(resp => {
-            console.log(resp.data)
-            nav('clientes')
+            console.log(resp)
+            nav('/clientes')
         })
     }
 
@@ -98,7 +100,7 @@ function CadastroCliente() {
 
                         <div className="row">
                             <div className="input-field col s10">
-                                <input className="validate" type="number" onChange={(e) => setCpf(e.target.value)} id="cpf"></input>
+                                <input className="validate" type="text" onChange={(e) => setCpf(e.target.value)} id="cpf"></input>
                                 <label>CPF:</label>
                             </div>
                         </div>

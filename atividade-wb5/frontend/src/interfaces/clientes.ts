@@ -6,9 +6,9 @@ export interface Cliente{
      nomeSocial: string;
      genero: string;
      cpf: string;
-     rg: Rg[];
+     rgs: Rg[];
      dataCadastro: Date;
-     telefone: Telefone[];
+     telefones: Telefone[];
      quantidade_produtos_consumidos: number;
      quantidade_servicos_consumidos: number;
      total_gasto_produto: number;

@@ -5,7 +5,7 @@ export class CreateClienteDto {
   nome: string;
   nomeSocial: string;
   genero: string;
-  cpf: number;
+  cpf: string;
   rgs : RG[]
   telefones : Telefone[];
   dataCadastro: Date;
