@@ -21,7 +21,7 @@ Repositório para as atividades em dupla WB da disciplina Programação Orientad
 * 2<a href="#2"> atvii-wb-typescript ✅</a>
 * 3<a href="#3"> atviii-wb-typescript ✅</a>
 * 4<a href="#4"> atviv-wb-typescript ✅</a>
-* 5<a href="#5"> atvv-wb-typescript 🚧</a>
+* 5<a href="#5"> atvv-wb-typescript ✅</a>
 
 <span id="1">
 
