@@ -35,7 +35,8 @@ tsc
 2º - npm install
 3º - node out/app/main.js
 ```
-
+<br>
+<br>
 <span id="2">
 
 ## Lista II
@@ -49,7 +50,8 @@ aplicação back-end) trabalhando com classes no TypeScript.
 2º - npm install
 3º - npm start
 ```
-
+<br>
+<br>
 <span id="3">
 
 ## Lista III
@@ -59,11 +61,12 @@ aplicação back-end) trabalhando com funções no TypeScript.
 Para rodar o programa deve usar os comandos: 
 
 ```cmd
-1º - cd .\atividade-wb3
+1º - cd .\atividade-wb3\
 2º - npm install
 3º - npm start
 ```
-
+<br>
+<br>
 <span id="4">
 
 ## Lista IV
@@ -73,19 +76,24 @@ Para rodar o programa deve usar os comandos:
 
 (Pasta Server)
 ```cmd
-1º - cd atviv-wb-typescript
-2º - cd executavel
-3º - java -jar wbbackend.jar
+1º - instale o jdk 17 em sua máquina
+2º - abra o projeto em seu editor de código-fonte 
+3º - No terminal: 'cd .\atividade-wb4\'
+4º - 'cd .\backend\'
+5º - cd executavel
+6º - java -jar wbbackend.jar
 ```
 
 (Pasta Client)
 ```cmd
-4º - cd atviv-wb-typescript. 
-5º - cd frontend
-6º - npm install
-6º - npm start
+7º - Abra um novo terminal
+8º - 'cd .\atividade-wb4\'
+9º - 'cd .\frontend\'
+10º - 'npm install'
+11º - 'npm start'
 ```
-
+<br>
+<br>
 <span id="5">
 
 ## Lista V
