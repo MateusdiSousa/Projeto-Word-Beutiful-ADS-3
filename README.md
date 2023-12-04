@@ -6,6 +6,8 @@ Repositório para as atividades em dupla WB da disciplina Programação Orientad
 
 ## Professor Doutor Gerson da Penha Neto
 
+## :busts_in_silhouette: A Equipe:
+
 | Partipantes | Github |
 | -------- |-------- |
 | Alicea Lima | <a href="https://github.com/alicearocha" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |
@@ -26,8 +28,7 @@ Repositório para as atividades em dupla WB da disciplina Programação Orientad
 ## Lista I
 
 #### Primeiro projeto do WB é do tipo cli (command-line interface) com cadastros dos clientes e seus respectivos produtos, serviços e listagens de negócios.
-Para rodar o programa deve usar os comandos: 
-
+:computer:🛠️ Para rodar o programa em sua máquina deve seguir os comandos:
 ```cmd
 cd atvi-wb-typescript
 tsc
@@ -86,7 +87,7 @@ npm start
 ## Lista V
 
 #### Finalização do projeto iniciado na lista I, unindo a interface com um backend desenvolvido pela equipe para atender não somente aos clientes, mas aos produtos e serviços também, feito em express.
-Para rodar o programa deve usar os comandos: 
+:computer:🛠️ Para rodar o programa em sua máquina deve seguir os comandos: 
 
 1º - Instale o postgres na sua máquina. Em seguida, crie um banco de dados com o nome de "wb".
 <br>
