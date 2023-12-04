@@ -89,9 +89,15 @@ npm start
 Para rodar o programa deve usar os comandos: 
 
 1º - Instale o postgres na sua máquina. Em seguida, crie um banco de dados com o nome de "wb".
+<br>
 2º - Dentro da raiz da pasta backend: crie uma arquivo '.env' e coloque as informações do seu banco seguindo o exemplo do arquivo '.env.exemplo.'
+<br>
 3º - No terminal: entre na pasta backend com o comando 'cd .\backend\'
+<br>
 4º - No terminal: digite 'npm install'
+<br>
 5º - No terminal: digite 'npm install --save @nestjs/typeorm typeorm pg'
+<br>
 6º - Abra um novo terminal: entra na pasta frontend com o comando 'cd .\frontend\'
+<br>
 7º - Agora neste terminal digite 'npm install' e em seguida 'npm run start dev'
