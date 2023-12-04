@@ -6,7 +6,7 @@ Repositório para as atividades em dupla WB da disciplina Programação Orientad
 
 ## Professor Doutor Gerson da Penha Neto
 
-## :busts_in_silhouette: A Equipe:
+## A Equipe:
 
 | Partipantes | Github |
 | -------- |-------- |
@@ -28,11 +28,11 @@ Repositório para as atividades em dupla WB da disciplina Programação Orientad
 ## Lista I
 
 #### Primeiro projeto do WB é do tipo cli (command-line interface) com cadastros dos clientes e seus respectivos produtos, serviços e listagens de negócios.
-:computer:🛠️ Para rodar o programa em sua máquina deve seguir os comandos:
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos:
 ```cmd
-cd atvi-wb-typescript
+1º - cd atvi-wb-typescript
 tsc
-node out/app/main.js
+2º - node out/app/main.js
 ```
 
 <span id="2">
@@ -41,11 +41,11 @@ node out/app/main.js
 
 #### Segundo projeto do WB tem o objetivo de desenvolver interfaces gráficas (sem vínculo algum com
 aplicação back-end) trabalhando com classes no TypeScript.
-Para rodar o programa deve usar os comandos: 
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos: 
 
 ```cmd
-cd atvii-wb-typescript
-npm start
+1º - cd atvii-wb-typescript
+2º - npm start
 ```
 
 <span id="3">
@@ -57,8 +57,8 @@ aplicação back-end) trabalhando com funções no TypeScript.
 Para rodar o programa deve usar os comandos: 
 
 ```cmd
-cd atviii-wb-typescript
-npm start
+1º - cd atviii-wb-typescript
+2º - npm start
 ```
 
 <span id="4">
@@ -87,8 +87,8 @@ npm start
 ## Lista V
 
 #### Finalização do projeto iniciado na lista I, unindo a interface com um backend desenvolvido pela equipe para atender não somente aos clientes, mas aos produtos e serviços também, feito em express.
-:computer:🛠️ Para rodar o programa em sua máquina deve seguir os comandos: 
-
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos: 
+``` cmd
 1º - Instale o postgres na sua máquina. Em seguida, crie um banco de dados com o nome de "wb".
 <br>
 2º - Dentro da raiz da pasta backend: crie uma arquivo '.env' e coloque as informações do seu banco seguindo o exemplo do arquivo '.env.exemplo.'
@@ -102,3 +102,4 @@ npm start
 6º - Abra um novo terminal: entra na pasta frontend com o comando 'cd .\frontend\'
 <br>
 7º - Agora neste terminal digite 'npm install' e em seguida 'npm run start dev'
+```
