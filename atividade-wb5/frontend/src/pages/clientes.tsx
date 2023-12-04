@@ -1,17 +1,22 @@
 import { Component, ReactNode, useState, useEffect } from "react";
 import SideBar from "../components/sidebar/sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import clientesService from "../services/clientes.service";
 import { ClienteI } from "../interfaces/clientes";
 
 function Cliente() {
     const [clientes, setClientes] = useState<ClienteI[]>([])
+    const nav = useNavigate()
 
     function getClientes() {
         clientesService.findAll().then(resp => {
             console.log(resp.data)
             setClientes(resp.data)
         }).catch(erro => console.log(erro))
+    }
+
+    const redirectoEdit = (cliente) => {
+        nav("/clientes/Editar", { state: { key: cliente } })
     }
 
     useEffect(() => {
@@ -50,12 +55,12 @@ function Cliente() {
                                         })}</p>
                                     </div>
 
-  
-
-                                    {/* <div className="card-action">
-                                        <Link to={`/clientes/editar/${cliente.id}`}><button className="waves-effect waves-light btn-small white-text blue">Editar</button></Link>
+                                    <div className="card-action">
+                                        <button onClick={() => {
+                                            redirectoEdit(cliente)
+                                        }} className="waves-effect waves-light btn-small white-text blue">Editar</button>
                                         <button className="waves-effect waves-light btn-small white-text red">Excluir</button>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>
