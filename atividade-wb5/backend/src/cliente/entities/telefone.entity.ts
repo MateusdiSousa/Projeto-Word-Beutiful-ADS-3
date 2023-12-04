@@ -7,7 +7,10 @@ export class TelefoneEntity {
 id : string
 
 @Column()
-telefone : string
+ddd : string
+
+@Column()
+numero : string
 
 @ManyToOne(() => ClienteEntity, (cliente) => cliente.telefones)
 cliente : ClienteEntity

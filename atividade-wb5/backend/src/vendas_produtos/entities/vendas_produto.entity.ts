@@ -14,8 +14,8 @@ export class VendasProduto {
     valor_total : number
 
     @ManyToOne(() => ClienteEntity, (cliente) => cliente.produtos_consumidos)
-    cliente : ClienteEntity
+    cliente : string
 
     @ManyToOne(() => ProdutoEntity, (produto) => produto.produto_vendas)
-    produto : ProdutoEntity
+    produto : string
 }

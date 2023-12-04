@@ -1,4 +1,5 @@
 export class CreateServicoDto {
+  id: string
   nome: string;
   descricao: string;
   preco: number;

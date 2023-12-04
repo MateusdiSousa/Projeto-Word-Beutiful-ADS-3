@@ -1,3 +1,5 @@
+import { ClienteI } from "./clientes";
+
 export interface Servico {
     nome: string;
     descricao: string;
@@ -20,7 +22,9 @@ export interface ServicoI {
 }
 
 export interface ServicoVenda {
-    servico : ServicoI
+    id : number
     quantidade : number
     valor_total : number
+    cliente : ClienteI
+    servico : ServicoI
 }

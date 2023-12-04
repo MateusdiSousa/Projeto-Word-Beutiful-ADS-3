@@ -9,7 +9,9 @@ export class VendasServicosController {
 
   @Post()
   create(@Body() createVendasServicoDto: CreateVendasServicoDto) {
-    return this.vendasServicosService.create(createVendasServicoDto);
+    const idServico = createVendasServicoDto.servico.id
+    const idCliente = createVendasServicoDto.cliente.id
+    return this.vendasServicosService.create(createVendasServicoDto,idServico, idCliente);
   }
 
   @Get()

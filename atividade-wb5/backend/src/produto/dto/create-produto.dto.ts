@@ -1,4 +1,5 @@
 export class CreateProdutoDto {
+  id: string
   nome: string;
   descricao: string;
   preco: number;

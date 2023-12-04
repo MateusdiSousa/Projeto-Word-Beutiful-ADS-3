@@ -13,7 +13,7 @@ export class ServicoEntity {
   descricao: string;
 
   @Column({type : 'float'})
-  preco: Number;
+  preco: number;
 
   @Column()
   quantidade_vendas: number;

@@ -2,6 +2,7 @@ import { RG } from "./rg.dto";
 import { Telefone } from "./telefone.dto";
 
 export class CreateClienteDto {
+  id: string;
   nome: string;
   nomeSocial: string;
   genero: string;

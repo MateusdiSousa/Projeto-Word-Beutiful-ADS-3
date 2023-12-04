@@ -1,3 +1,5 @@
+import { Cliente, ClienteI } from "./clientes";
+
 export interface Produto {
     nome: string;
     descricao: string;
@@ -21,7 +23,9 @@ export interface ProdutoI {
 
 
 export interface ProdutoVenda {
-    produto : ProdutoI
+    id : number
     quantidade : number
     valor_total : number
+    cliente : ClienteI
+    produto : ProdutoI
 }

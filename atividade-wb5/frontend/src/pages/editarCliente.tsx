@@ -4,7 +4,8 @@ import { Link, redirect, redirectDocument, useNavigate, useParams } from "react-
 import Combobox from "react-widgets/Combobox";
 import DataPicker from "react-widgets/DatePicker";
 import axios from "axios"
-import { ICliente, ITelefone } from "./clientes";
+import { ClienteI } from "../interfaces/clientes";
+import { Telefone, TelefoneI } from "../interfaces/telefones";
 
 interface clienteId {
     id: number
@@ -15,7 +16,7 @@ interface addTelefone {
 }
 
 function EditarCliente() {
-    const [cliente, setCliente] = useState<ICliente>()
+    const [cliente, setCliente] = useState<ClienteI>()
     const [ddd, setDDD] = useState<string>('')
     const [telefoneNumero, setTelefoneNumero] = useState<string>('')
     const { id } = useParams()
@@ -49,7 +50,7 @@ function EditarCliente() {
     }
 
     const adicionaNumero = () => {
-        const newTelefone: ITelefone = {
+        const newTelefone: TelefoneI = {
             id: null,
             ddd: ddd,
             numero: telefoneNumero,
@@ -83,7 +84,7 @@ function EditarCliente() {
         <>
             <SideBar />
             <div className="container">
-                <h2>Cadastro de Cliente</h2>
+                <h2>Editar Cliente</h2>
                 {cliente && (
                     <div className="row">
                         <Link to={'/clientes'} className="btn-floating btn-small waves-effect waves-light transparent"><i className="material-icons black-text">arrow_back</i></Link>
@@ -103,61 +104,6 @@ function EditarCliente() {
                                 </div>
                             </div>
 
-
-                            <div className="row">
-                                <div className="input-field col s10">
-                                    <input onChange={(e) => setCliente({ ...cliente, sobreNome: e.target.value })} value={cliente.sobreNome} id="middle_name" type="text" className="validate"></input>
-                                    <label className="active" >Sobrenome</label>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="input-field col s10">
-                                    <input onChange={(e) => setCliente({ ...cliente, email: e.target.value })} value={cliente.email} id="middle_name" type="email" className="validate"></input>
-                                    <label className="active" >Email</label>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <h5>Endereço</h5>
-                                <div>
-                                    <div className="input-field col s5">
-                                        <input onChange={(e) => setCliente({ ...cliente, endereco: { ...cliente.endereco, estado: e.target.value } })} value={cliente.endereco.estado} className="validate" type="text" id="estado"></input>
-                                        <label className="active">Estado</label>
-                                    </div>
-
-                                    <div className="input-field col s5">
-                                        <input onChange={e => setCliente({ ...cliente, endereco: { ...cliente.endereco, cidade: e.target.value } })} value={cliente.endereco.cidade} className="validate" type="text" id="cidade"></input>
-                                        <label className="active">Cidade</label>
-                                    </div>
-
-                                    <div className="input-field col s5">
-                                        <input onChange={e => setCliente({ ...cliente, endereco: { ...cliente.endereco, bairro: e.target.value } })} value={cliente.endereco.bairro} className="validate" type="text" id="bairro"></input>
-                                        <label className="active">Bairro</label>
-                                    </div>
-
-                                    <div className="input-field col s5">
-                                        <input onChange={e => setCliente({ ...cliente, endereco: { ...cliente.endereco, rua: e.target.value } })} value={cliente.endereco.rua} className="validate" type="text" id="rua"></input>
-                                        <label className="active">Rua</label>
-                                    </div>
-
-                                    <div className="input-field col s5">
-                                        <input onChange={e => setCliente({ ...cliente, endereco: { ...cliente.endereco, numero: e.target.value } })} value={cliente.endereco.numero} id="numero" className="validate" type="text"></input>
-                                        <label htmlFor="numero" className="active">Número</label>
-                                    </div>
-
-                                    <div className="input-field col s5">
-                                        <input onChange={e => setCliente({ ...cliente, endereco: { ...cliente.endereco, codigoPostal: e.target.value } })} value={cliente.endereco.codigoPostal} className="validate" type="text" id="CEP"></input>
-                                        <label className="active">CEP</label>
-                                    </div>
-
-                                    <div className="input-field col s5">
-                                        <input onChange={e => setCliente({ ...cliente, endereco: { ...cliente.endereco, informacoesAdicionais: e.target.value } })} value={cliente.endereco.informacoesAdicionais} className="validate" type="text" id="informacoes_adicionais"></input>
-                                        <label className="active">Informacoes Adicionais</label>
-                                    </div>
-
-                                </div>
-                            </div>
 
 
                             <h5>Telefones: </h5>

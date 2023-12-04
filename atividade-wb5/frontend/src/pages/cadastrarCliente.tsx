@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SideBar from "../components/sidebar/sidebar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { Cliente } from "../interfaces/clientes";
 import clientesService from "../services/clientes.service";
 import { Rg } from "../interfaces/rgs";
@@ -44,6 +44,7 @@ function CadastroCliente() {
         clientesService.create(cliente).then(resp => {
             console.log(resp)
             nav('/clientes')
+            window.location.reload()
         })
     }
 

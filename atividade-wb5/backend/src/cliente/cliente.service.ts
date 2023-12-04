@@ -12,10 +12,10 @@ export class ClienteService {
     @InjectRepository(ClienteEntity)
     private clienteRepository: Repository<ClienteEntity>,
     @InjectRepository(TelefoneEntity)
-    private telefoneRepository : Repository<TelefoneEntity>,
+    private telefoneRepository: Repository<TelefoneEntity>,
     @InjectRepository(RgEntity)
-    private RgsRepository : Repository<RgEntity>
-  ) {}
+    private RgsRepository: Repository<RgEntity>
+  ) { }
 
   async create(createClienteDto: CreateClienteDto) {
     const user = new ClienteEntity()
@@ -32,7 +32,7 @@ export class ClienteService {
 
     this.clienteRepository.manager.save(user)
 
-    
+
     createClienteDto.rgs.forEach(rg => {
       const newRg = new RgEntity
       newRg.cliente = user
@@ -41,30 +41,31 @@ export class ClienteService {
       this.RgsRepository.manager.save(newRg)
     })
 
-    createClienteDto.telefones.forEach( telefone => {
+    createClienteDto.telefones.forEach(telefone => {
       const newTelefone = new TelefoneEntity()
       newTelefone.cliente = user
-      newTelefone.telefone = `(${telefone.ddd}) ${telefone.numero}`
+      newTelefone.ddd = telefone.ddd
+      newTelefone.numero = telefone.numero
       this.telefoneRepository.manager.save(newTelefone)
     })
   }
 
   async findAll() {
     return await this.clienteRepository.find({
-      relations : {
-        rgs : true,
-        telefones : true
+      relations: {
+        rgs: true,
+        telefones: true
       }
     });
   }
 
   async findOne(id: string) {
     return await this.clienteRepository.find({
-      relations : {
-        rgs : true,
-        telefones : true
+      relations: {
+        rgs: true,
+        telefones: true
       },
-      where : {id : id}
+      where: { id: id }
     });
   }
 

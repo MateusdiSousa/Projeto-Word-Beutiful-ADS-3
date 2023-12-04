@@ -8,14 +8,20 @@ import { ProdutoI, ProdutoVenda } from '../interfaces/produtos'
 import servicosService from '../services/servicos.service'
 import produtosService from '../services/produtos.service'
 import { useEffect } from 'react'
+import { ClienteI } from '../interfaces/clientes'
+import clientesService from '../services/clientes.service'
+import serviceVendaProduto from '../services/venda.service'
+import { resourceUsage } from 'process'
 
 
 function Vendas() {
+    const [clientesCombo, setClientesCombo] = useState<ClienteI[]>()
     const [servicosCombo, setServicoCombo] = useState<ServicoI[]>()
     const [produtosCombo, setProdutoCombo] = useState<ProdutoI[]>()
 
     const [servicoSelect, setServicoSelect] = useState<ServicoI>()
     const [produtoSelect, setProdutoSelect] = useState<ProdutoI>()
+    const [clienteSelect, setClienteSelect] = useState<ClienteI>()
 
     const [produtos, setProduto] = useState<ProdutoVenda[]>([])
     const [servicos, setServico] = useState<ServicoVenda[]>([])
@@ -28,6 +34,8 @@ function Vendas() {
             servico: servicoSelect,
             quantidade: 0,
             valor_total: 0,
+            id: 0,
+            cliente: undefined
         }
         if (servicos.some(item => item.servico.id == servico.servico.id)) {
             alert('Item já está na lista de compras')
@@ -41,6 +49,8 @@ function Vendas() {
             produto: produtoSelect,
             quantidade: 0,
             valor_total: 0,
+            id: 0,
+            cliente: undefined
         }
         if (produtos.some(item => item.produto.id == produto.produto.id)) {
             alert('Item já está na lista de compras')
@@ -59,6 +69,33 @@ function Vendas() {
             setProdutoCombo(resp.data)
             console.log(resp.data)
         }).catch(erro => console.log(erro))
+
+        await clientesService.findAll().then((resp) => {
+            setClientesCombo(resp.data)
+            console.log(resp.data)
+        }).catch(erro => console.log(erro))
+    }
+
+    async function venda() {
+        if (produtos.length !== 0) {
+            produtos.forEach(async venda => {
+                const newVenda = venda
+                newVenda.cliente = clienteSelect
+                console.log(newVenda)
+                await serviceVendaProduto.createProduto(newVenda).then(resp => {
+                }).catch(erro => console.log(erro))
+            });
+        }
+        if (servicos.length !== 0) {
+            servicos.forEach(async venda => {
+                const newVenda = venda
+                newVenda.cliente = clienteSelect
+                await serviceVendaProduto.createServico(newVenda).then(resp => {
+                    console.log(resp.data)
+                }).catch(erro => console.log(erro))
+            });
+        }
+
     }
 
     async function ComboBoxChangeServico(value) {
@@ -69,6 +106,11 @@ function Vendas() {
     async function ComboBoxChangeProduto(value) {
         const objeto = produtosCombo.find((item: ProdutoI) => item.id === value.id)
         setProdutoSelect(objeto)
+    }
+
+    async function ComboBoxChangeCliente(value) {
+        const objeto = clientesCombo.find((item: ClienteI) => item.id === value.id)
+        setClienteSelect(objeto)
     }
 
     async function ChangeValorTotalServico(idServico: string | undefined, value) {
@@ -87,10 +129,11 @@ function Vendas() {
 
     async function ChangeValorTotalProduto(idProduto: string | undefined, value) {
         const newLista = produtos.map((produto) => {
-            if (produto.produto.id == idProduto) {
+            if (produto.produto.id === idProduto) {
                 console.log(value)
                 return { ...produto, quantidade: value, valor_total: produto.produto.preco * value }
             }
+            return produto
         })
         console.log(newLista)
         setProduto(newLista)
@@ -126,9 +169,11 @@ function Vendas() {
                     <div className='col s4 m3'>
                         <Combobox
                             placeholder='Cliente'
-                            data={["Claudia", "Mateus", "Alicea", "Gerson"]}
+                            data={clientesCombo}
+                            textField={'nome'}
+                            dataKey={'id'}
+                            onChange={valor => ComboBoxChangeCliente(valor)}
                         />
-                        <button className='btn-small amber lighten-1'>selecionar</button>
                     </div>
                     <div className='col s4 m3'>
                         <Combobox
@@ -213,7 +258,7 @@ function Vendas() {
                         <h5>Preço Total: R$ {valorTotal.toFixed(2)}</h5>
                     </div>
 
-                    <button onClick={() => alert('Venda realizada')} className='waves-effect waves-light btn yellow lighten-1 '>Finalizar Venda</button>
+                    <button onClick={() => venda()} className='waves-effect waves-light btn yellow lighten-1 '>Finalizar Venda</button>
                 </div>
 
             </div>
