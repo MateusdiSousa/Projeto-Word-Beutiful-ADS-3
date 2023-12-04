@@ -32,7 +32,8 @@ Repositório para as atividades em dupla WB da disciplina Programação Orientad
 ```cmd
 1º - cd .\atividade-wb1\
 tsc
-2º - node out/app/main.js
+2º - npm install
+3º - node out/app/main.js
 ```
 
 <span id="2">
@@ -45,7 +46,8 @@ aplicação back-end) trabalhando com classes no TypeScript.
 
 ```cmd
 1º - cd .\atividade-wb2\
-2º - npm start
+2º - npm install
+3º - npm start
 ```
 
 <span id="3">
@@ -57,8 +59,9 @@ aplicação back-end) trabalhando com funções no TypeScript.
 Para rodar o programa deve usar os comandos: 
 
 ```cmd
-1º - cd .\atividade-wb3\
-2º - npm start
+1º - cd .\atividade-wb3
+2º - npm install
+3º - npm start
 ```
 
 <span id="4">
@@ -78,7 +81,8 @@ Para rodar o programa deve usar os comandos:
 (Pasta Client)
 ```cmd
 4º - cd atviv-wb-typescript. 
-5º - cd client
+5º - cd frontend
+6º - npm install
 6º - npm start
 ```
 
@@ -95,6 +99,10 @@ Para rodar o programa deve usar os comandos:
 3º - No terminal: entre na pasta backend com o comando 'cd .\backend\'
 4º - No terminal: digite 'npm install'
 5º - No terminal: digite 'npm install --save @nestjs/typeorm typeorm pg'
-6º - Abra um novo terminal: entra na pasta frontend com o comando 'cd .\frontend\'
-7º - Agora neste terminal digite 'npm install' e em seguida 'npm run start dev'
+6º - No terminal: digite 'npm run start' para rodar o servidor
+
+----------------------------------Front-End---------------------------------------
+
+1º - Abra um novo terminal: entra na pasta frontend com o comando 'cd .\frontend\'
+7º - Agora neste terminal digite 'npm install' e em seguida 'npm run start' para rodar a aplicação
 ```
