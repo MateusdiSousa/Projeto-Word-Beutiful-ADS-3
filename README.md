@@ -2,7 +2,7 @@
 
 # ADS03_ILP007
 
-Repositório para as atividades em DUPLA da disciplina Programação Orientada a Objetos.
+Repositório para as atividades em dupla WB da disciplina Programação Orientada a Objetos.
 
 ## Professor Doutor Gerson da Penha Neto
 
@@ -88,16 +88,10 @@ npm start
 #### Finalização do projeto iniciado na lista I, unindo a interface com um backend desenvolvido pela equipe para atender não somente aos clientes, mas aos produtos e serviços também, feito em express.
 Para rodar o programa deve usar os comandos: 
 
-(Server)
-```cmd
-cd atvv-wb-typescript
-cd server
-npm run dev
-```
-
-(Client)
-```cmd
-cd atvv-wb-typescript. 
-cd client
-npm start
-```
+1º - Instale o postgres na sua máquina. Em seguida, crie um banco de dados com o nome de "wb".
+2º - Dentro da raiz da pasta backend: crie uma arquivo '.env' e coloque as informações do seu banco seguindo o exemplo do arquivo '.env.exemplo.'
+3º - No terminal: entre na pasta backend com o comando 'cd .\backend\'
+4º - No terminal: digite 'npm install'
+5º - No terminal: digite 'npm install --save @nestjs/typeorm typeorm pg'
+6º - Abra um novo terminal: entra na pasta frontend com o comando 'cd .\frontend\'
+7º - Agora neste terminal digite 'npm install' e em seguida 'npm run start dev'
