@@ -2,9 +2,11 @@
 
 # ADS03_ILP007
 
-Repositório para as atividades em DUPLA da disciplina Programação Orientada a Objetos.
+Repositório para as atividades em dupla WB da disciplina Programação Orientada a Objetos.
 
 ## Professor Doutor Gerson da Penha Neto
+
+## A Equipe:
 
 | Partipantes | Github |
 | -------- |-------- |
@@ -26,12 +28,11 @@ Repositório para as atividades em DUPLA da disciplina Programação Orientada a
 ## Lista I
 
 #### Primeiro projeto do WB é do tipo cli (command-line interface) com cadastros dos clientes e seus respectivos produtos, serviços e listagens de negócios.
-Para rodar o programa deve usar os comandos: 
-
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos:
 ```cmd
-cd atvi-wb-typescript
+1º - cd .\atividade-wb1\
 tsc
-node out/app/main.js
+2º - node out/app/main.js
 ```
 
 <span id="2">
@@ -40,11 +41,11 @@ node out/app/main.js
 
 #### Segundo projeto do WB tem o objetivo de desenvolver interfaces gráficas (sem vínculo algum com
 aplicação back-end) trabalhando com classes no TypeScript.
-Para rodar o programa deve usar os comandos: 
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos: 
 
 ```cmd
-cd atvii-wb-typescript
-npm start
+1º - cd .\atividade-wb2\
+2º - npm start
 ```
 
 <span id="3">
@@ -56,8 +57,8 @@ aplicação back-end) trabalhando com funções no TypeScript.
 Para rodar o programa deve usar os comandos: 
 
 ```cmd
-cd atviii-wb-typescript
-npm start
+1º - cd .\atividade-wb3\
+2º - npm start
 ```
 
 <span id="4">
@@ -65,20 +66,20 @@ npm start
 ## Lista IV
 
 #### Projeto para a integração da interface com um backend previamente disponibilizado (apenas clientes).
-Para rodar o programa deve usar os comandos: 
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos:
 
-(Server)
+(Pasta Server)
 ```cmd
-cd atviv-wb-typescript
-cd executavel
-java -jar wbbackend.jar
+1º - cd atviv-wb-typescript
+2º - cd executavel
+3º - java -jar wbbackend.jar
 ```
 
-(Client)
+(Pasta Client)
 ```cmd
-cd atviv-wb-typescript. 
-cd client
-npm start
+4º - cd atviv-wb-typescript. 
+5º - cd client
+6º - npm start
 ```
 
 <span id="5">
@@ -86,18 +87,14 @@ npm start
 ## Lista V
 
 #### Finalização do projeto iniciado na lista I, unindo a interface com um backend desenvolvido pela equipe para atender não somente aos clientes, mas aos produtos e serviços também, feito em express.
-Para rodar o programa deve usar os comandos: 
-
-(Server)
-```cmd
-cd atvv-wb-typescript
-cd server
-npm run dev
-```
-
-(Client)
-```cmd
-cd atvv-wb-typescript. 
-cd client
-npm start
+🛠️ Para rodar o programa em sua máquina deve seguir os comandos: 
+``` cmd
+1º - Instale o postgres na sua máquina. Em seguida, crie um banco de dados com o nome de "wb".
+2º - cd atividade-wb5
+2º - Dentro da raiz da pasta backend: crie uma arquivo '.env' e coloque as informações do seu banco seguindo o exemplo do arquivo '.env.exemplo.'
+3º - No terminal: entre na pasta backend com o comando 'cd .\backend\'
+4º - No terminal: digite 'npm install'
+5º - No terminal: digite 'npm install --save @nestjs/typeorm typeorm pg'
+6º - Abra um novo terminal: entra na pasta frontend com o comando 'cd .\frontend\'
+7º - Agora neste terminal digite 'npm install' e em seguida 'npm run start dev'
 ```
